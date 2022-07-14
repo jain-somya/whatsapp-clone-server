@@ -21,7 +21,7 @@ app.use(cors());
 //db config
 
 const mongodb_url =
-  "mongodb+srv://admin:EDftLLq21c5OtQSM@cluster0.tonly.mongodb.net/whatsappdb?retryWrites=true&w=majority";
+  "mongodb+srv://admin:EDftLLq21c5OtQSM@cluster0.tonly.mongodb.net/whatsappdb?retryWrites=true&w=majority?directConnection=true";
 mongoose.connect(
   mongodb_url
   //,{
