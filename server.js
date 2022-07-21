@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import Messages from "./dbMessages.js";
+import Groups from './dbGroups.js'
 import Pusher from "pusher";
 import cors from "cors";
 //app config
@@ -21,7 +22,7 @@ app.use(cors());
 //db config
 
 mongoose.connect(
-  process.env.mongodb_url
+ 'mongodb+srv://admin:EDftLLq21c5OtQSM@cluster0.tonly.mongodb.net/whatsappdb?retryWrites=true&w=majority?directConnection=true'
   //,{
   //   useCreateIndex: true,
   //   useNewUrlParser: true,
@@ -54,6 +55,7 @@ db.once("open", () => {
 // routes
 
 app.get("/", (req, res) => res.status(200).send("hello world"));
+
 app.get("/messages/sync", (req, res) => {
   Messages.find((err, data) => {
     if (err) {
@@ -63,6 +65,17 @@ app.get("/messages/sync", (req, res) => {
     }
   });
 });
+
+app.get("/groups", (req, res) => {
+  Groups.find((err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+});
+
 app.post("/messages/new", (req, res) => {
   const dbMessage = req.body;
 
