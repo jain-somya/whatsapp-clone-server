@@ -76,6 +76,17 @@ app.get("/groups", (req, res) => {
   });
 });
 
+app.post("/groups/new", (req, res) => {
+  const groupData = req.body;
+  Groups.create(groupData, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+});
+
 app.post("/messages/new", (req, res) => {
   const dbMessage = req.body;
 
